@@ -1,5 +1,7 @@
-"""Custom logger with colors"""
+"""Custom logger with colors on terminal"""
 import logging
+
+__version__ = '1.0.0'
 
 # escape codes for changing colors in the terminal
 NORMAL = '\x1b[37m'
@@ -109,7 +111,11 @@ class MwkLogger:
 if __name__ == '__main__':
     # Testing custom logger
     # new logger referred by variable: log
-    log = MwkLogger(name='mwk', file='logger.log', stream_level='DEBUG', file_level='DEBUG', time=True).logger
+    log = MwkLogger(name='mwk',
+                    file='logger.log',
+                    stream_level='DEBUG',
+                    file_level='DEBUG',
+                    time=True).logger
     # some log records...
     log.debug('This is a debug message.')
     log.info('This is an info message.')
@@ -119,4 +125,4 @@ if __name__ == '__main__':
     try:
         raise ZeroDivisionError('Some error')
     except Exception:
-        log.exception('This is a exception message!')
+        log.exception('This is an exception message!')
