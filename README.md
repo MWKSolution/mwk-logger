@@ -5,7 +5,7 @@
 
 **Custom logger with colors on terminal.**  
 
-![mwk logger example](assets/mwk_logger_example.jpg)
+![mwk logger example](mwk_logger/mwk_logger_example.jpg)
 
 ---
 
@@ -13,7 +13,7 @@
 
 ***1. Get instance of mwk-logger:*** (example)
 ```python
-from mwk_logger.logger import MwkLogger
+from mwk_logger import MwkLogger
 
 log = MwkLogger(name='mwk',
                 file='logger.log',
