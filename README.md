@@ -2,14 +2,18 @@
 # MWK logger
 
 ---
-
+[![PyPI](https://img.shields.io/pypi/v/mwk-logger)](https://pypi.org/project/mwk-logger/)  
 **Custom logger with colors on terminal.**  
 
-![mwk logger example](mwk_logger/mwk_logger_example.jpg)
+![mwk_logger_example](https://user-images.githubusercontent.com/105928466/172430763-e3407715-3b97-40e4-8cdb-9e2e64adc6e6.jpg)
 
 ---
 
-### Using logger: 
+### Using logger:  
+
+```
+pip install mwk-logger
+```
 
 ***1. Get instance of mwk-logger:*** (example)
 ```python
