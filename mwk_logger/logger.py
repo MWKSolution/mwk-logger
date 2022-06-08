@@ -1,7 +1,7 @@
 """Custom logger with colors on terminal"""
 import logging
 
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 
 # escape codes for changing colors in the terminal
 NORMAL = '\x1b[37m'
