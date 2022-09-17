@@ -76,29 +76,32 @@ class LogHandler:
         self.handler.setFormatter(_formatter)
 
 
+
+
 class MwkLogger:
     """Custom logger class"""
-
-    def __init__(self,
-                 name='mwk',  # name of the logger
-                 file='mwk.log',  # path to log file
-                 stream_level='WARNING',  # logging to terminal level
-                 file_level=None,  # logging to file level
-                 time=False):  # add timestamp to stream logging
+    def __new__(cls,
+                name='mwk',                # name of the logger
+                file='mwk.log',            # path to log file
+                stream_level='WARNING',    # logging to terminal level
+                file_level=None,           # logging to file level
+                time=False):               # add timestamp to stream logging
         """Constructor parameters:
         name - name of the logger, by default = 'mwk',
         file - path to file to log into, by default = 'mwk.log',
         stream_level - logging level for terminal, by default = 'WARNING',
         file_level - logging level for file, by default = None,
-        time - if timestamp should be added to terminal log, by default = False, for file log timestamp is always added.
+        time - if timestamp should be added to terminal log, by default = False,
 
         LEVELS:
          None - no logging or:
          'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'.
-        If both levels are set to None stream_level is changed to WARNING."""
+        If both levels are set to None stream_level is changed to WARNING.
+
+        !!! __new__ returns instance of logging.logger, no need to use .logger after the constructor """
         try:
-            self.logger = logging.getLogger(name)
-            self.logger.setLevel('DEBUG')
+            logger = logging.getLogger(name)
+            logger.setLevel('DEBUG')
             # if both levels set to None then set stream level to DEBUG
             if not stream_level and not file_level:
                 stream_level = 'DEBUG'
@@ -107,18 +110,23 @@ class MwkLogger:
                 stream = LogHandler(logging.StreamHandler(),
                                     stream_level,
                                     MwkFormatter(time))
-                self.logger.addHandler(stream.handler)
+                logger.addHandler(stream.handler)
             if file_level:  # and for file
                 file = LogHandler(logging.FileHandler(file),
                                   file_level,
                                   logging.Formatter(fmt=FILE_FMT, datefmt=DATE_FMT))
-                self.logger.addHandler(file.handler)
+                logger.addHandler(file.handler)
+            return logger
         # catch error creating handler
         except Exception as err:
             raise LoggerCreationError('ERROR creating logger:') from err
 
 
 if __name__ == '__main__':
+    class TestError(Exception):
+        pass
+
+
     # Record format
     print('Record format:', FILE_FMT)
     # Test colors
@@ -127,11 +135,12 @@ if __name__ == '__main__':
 
     # Testing custom logger
     # new logger referred by variable: log
+    # !!! v2.0.0 no need to use .logger after the constructor !!!
     log = MwkLogger(name='mwk',
                     file='logger.log',
                     stream_level='DEBUG',
                     file_level='DEBUG',
-                    time=False).logger
+                    time=False)
     # some log records...
     log.debug('This is a debug message.')
     log.info('This is an info message.')
@@ -139,6 +148,6 @@ if __name__ == '__main__':
     log.error('This is an error message!')
     log.critical('This is a critical message!!!')
     try:
-        raise ZeroDivisionError('Same like log.error but logs also traceback when error was raised!')
+        raise TestError('Same like log.error but logs also traceback when error was raised!')
     except Exception:
         log.exception('This is an exception message!')  #
