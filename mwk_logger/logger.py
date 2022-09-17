@@ -76,8 +76,6 @@ class LogHandler:
         self.handler.setFormatter(_formatter)
 
 
-
-
 class MwkLogger:
     """Custom logger class"""
     def __new__(cls,
