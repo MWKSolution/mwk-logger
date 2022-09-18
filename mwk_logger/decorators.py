@@ -2,7 +2,7 @@ import logging
 from functools import wraps, partial
 from time import perf_counter_ns as pc
 from inspect import signature
-from logger import ESC
+from mwk_logger.logger import ESC
 
 
 class BadLoggerError(Exception):
@@ -84,14 +84,14 @@ if __name__ == '__main__':
     from time import sleep
     from logger import MwkLogger
 
-    # @timer
-    # @f_sig
-    # def functionA(*args, **kwargs):
-    #     # ... some function ...
-    #     sleep(1.531)
-    #     return True
-    #
-    # x = functionA('arg', kwarg='kwarg')
+    @timer
+    @f_sig
+    def functionA(*args, **kwargs):
+        # ... some function ...
+        sleep(1.531)
+        return True
+
+    x = functionA('arg', kwarg='kwarg')
 
     log = MwkLogger(stream_level='DEBUG', file_level='DEBUG')
 
