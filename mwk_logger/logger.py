@@ -99,6 +99,8 @@ class MwkLogger:
         !!! __new__ returns instance of logging.logger, no need to use .logger after the constructor """
         try:
             logger = logging.getLogger(name)
+
+
             logger.setLevel('DEBUG')
             # if both levels set to None then set stream level to DEBUG
             if not stream_level and not file_level:
@@ -148,4 +150,4 @@ if __name__ == '__main__':
     try:
         raise TestError('Same like log.error but logs also traceback when error was raised!')
     except Exception:
-        log.exception('This is an exception message!')  #
+        log.exception('This is an exception message!')

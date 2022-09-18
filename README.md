@@ -4,18 +4,23 @@
 ---
 [![PyPI](https://img.shields.io/pypi/v/mwk-logger)](https://pypi.org/project/mwk-logger/)  
 **Custom logger with colors on terminal.**  
-
-![mwk_logger_example](https://user-images.githubusercontent.com/105928466/172430763-e3407715-3b97-40e4-8cdb-9e2e64adc6e6.jpg)
-
+![logger](https://user-images.githubusercontent.com/105928466/190899542-94a70a4d-ef1a-418a-90be-0143d3d1d630.JPG)  
 **And some useful decorators.**  
+![dec](https://user-images.githubusercontent.com/105928466/190899507-cfcefe55-b21a-4d3b-ae85-bce418121366.JPG)  
+![dec_log](https://user-images.githubusercontent.com/105928466/190899529-b147e76a-29f1-4383-9670-b24fbc02e4a5.JPG)  
 
 ---
 
-## Using logger 
+## Installing package
 
 ```
 pip install mwk-logger
 ```
+
+---
+
+## Using logger
+
 ### 1. Get instance of mwk-logger
 ```python
 from mwk_logger import MwkLogger
@@ -26,7 +31,6 @@ log = MwkLogger(name='mwk',
                 file_level='DEBUG',
                 time=True)
 ```
->*! No need to add* ***.logger*** *at the end !*   
 
 *keyword parameters:*  
 - *name* - name of the logger, by default = 'mwk',
@@ -51,5 +55,37 @@ log.critical('This is a critical message!!!')
 log.exception('This is an exception message!')
 ```
 
-### 3. Decorators
-1. timer - 
+---
+
+## Using decorators
+1. **@timer** - print or log the runtime of the decorated function
+2. **@f_sig** - print or log the signature and the return value of the decorated function  
+### 1. Decorator with no arguments
+Prints on screen.  
+```python
+from mwk_logger import timer, f_sig
+
+@timer
+@f_sig
+def function(*args, **kwargs):
+    # ... some function ...
+    return 'something'
+```
+
+### 1. Decorator with arguments
+Output is logged with provided logger with level = **INFO**.  
+!!! keyword ***logger*** is obligatory !!!
+```python
+from mwk_logger import MwkLogger, timer, f_sig
+
+log = MwkLogger()
+
+@timer(logger=log)
+@f_sig(logger=log)
+def function(*args, **kwargs):
+    # ... some function to be logged...
+    return 'something'
+```
+
+---
+
