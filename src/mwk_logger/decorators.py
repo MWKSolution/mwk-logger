@@ -2,7 +2,7 @@ import logging
 from functools import wraps, partial
 from time import perf_counter_ns as pc
 from inspect import signature
-from mwk_logger.logger import ESC
+from src.mwk_logger.logger import ESC
 
 
 class BadLoggerError(Exception):

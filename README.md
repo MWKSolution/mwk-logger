@@ -22,8 +22,9 @@ pip install mwk-logger
 ## Using logger
 
 ### 1. Get instance of mwk-logger
+
 ```python
-from mwk_logger import MwkLogger
+from src.mwk_logger import MwkLogger
 
 log = MwkLogger(name='mwk',
                 file='logger.log',
@@ -61,30 +62,34 @@ log.exception('This is an exception message!')
 1. **@timer** - print or log the runtime of the decorated function
 2. **@f_sig** - print or log the signature and the return value of the decorated function  
 ### 1. Decorator with no arguments
-Prints on screen.  
+Prints on screen.
+
 ```python
-from mwk_logger import timer, f_sig
+from src.mwk_logger import timer, f_sig
+
 
 @timer
 @f_sig
 def function(*args, **kwargs):
-    # ... some function ...
-    return 'something'
+ # ... some function ...
+ return 'something'
 ```
 
 ### 1. Decorator with arguments
 Output is logged with provided logger with level = **INFO**.  
 !!! keyword ***logger*** is obligatory !!!
+
 ```python
-from mwk_logger import MwkLogger, timer, f_sig
+from src.mwk_logger import MwkLogger, timer, f_sig
 
 log = MwkLogger()
+
 
 @timer(logger=log)
 @f_sig(logger=log)
 def function(*args, **kwargs):
-    # ... some function to be logged...
-    return 'something'
+ # ... some function to be logged...
+ return 'something'
 ```
 
 ---
